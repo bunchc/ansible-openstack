@@ -104,7 +104,7 @@ Vagrant.configure("2") do |config|
 
 	# Logging host is also the deployment server, so this will have the master SSH key which then gets copied
 	# Also the first to boot, so get that to set the keys to be used.
-	if hostname == "controller-01"
+	if hostname == "compute-01"
 	  box.vm.provision :shell, :path => "masterkey.sh"
 	else
 	  box.vm.provision :shell, :path => "clientkey.sh"
@@ -174,7 +174,7 @@ Vagrant.configure("2") do |config|
         box.vm.provider :virtualbox do |vbox|
           # Defaults
 	  vbox.linked_clone = true if Vagrant::VERSION =~ /^1.8/
-          vbox.customize ["modifyvm", :id, "--memory", 4096]
+          vbox.customize ["modifyvm", :id, "--memory", 2048]
           vbox.customize ["modifyvm", :id, "--cpus", 1]
           if prefix == "controller"
             vbox.customize ["modifyvm", :id, "--memory", 5172]
